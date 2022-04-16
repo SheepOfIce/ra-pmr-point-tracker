@@ -160,11 +160,6 @@ export default {
     font-size: 1.5em;
 }
 
-.text-bottom {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1em;
-}
-
 .text-top > .left,
 .text-top > .right,
 .text-bottom > .left,
