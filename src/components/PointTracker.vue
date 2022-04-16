@@ -8,7 +8,7 @@
                 </div>
                 <div class="text-bottom">
                     <div class="left">10 Points</div>
-                    <div class="right">&nbsp;</div>
+                    <div class="right">0/10 Points</div>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="text-bottom">
                     <div class="left">5 Points Each</div>
-                    <div class="right">&nbsp;</div>
+                    <div class="right">0/35 Points</div>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="text-bottom">
                     <div class="left">1 Point Each</div>
-                    <div class="right">&nbsp;</div>
+                    <div class="right">0/80 Points</div>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="text-bottom">
                     <div class="left">1 Point Each</div>
-                    <div class="right">&nbsp;</div>
+                    <div class="right">0/160 Points</div>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="text-bottom">
                     <div class="left">5 Points Each</div>
-                    <div class="right">&nbsp;</div>
+                    <div class="right">0/175 Points</div>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="text-bottom">
                     <div class="left">10 Points Each</div>
-                    <div class="right">&nbsp;</div>
+                    <div class="right">0/70 Points</div>
                 </div>
             </div>
         </div>
@@ -120,6 +120,7 @@ export default {
     cursor: pointer;
     color: #fff;
     height: calc(460px / 7);
+    text-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
 }
 
 .category > .padding {
@@ -164,10 +165,10 @@ export default {
     font-size: 1em;
 }
 
-.text-top .left,
-.text-top .right,
-.text-bottom .left,
-.text-bottom .right {
+.text-top > .left,
+.text-top > .right,
+.text-bottom > .left,
+.text-bottom > .right {
     display: inline-block;
     width: 50%;
 }
