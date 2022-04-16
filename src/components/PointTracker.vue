@@ -165,11 +165,16 @@ export default {
 .text-bottom > .left,
 .text-bottom > .right {
     display: inline-block;
-    width: 50%;
+}
+
+.text-top .left,
+.text-bottom .left {
+    width: 75%;
 }
 
 .text-top .right,
 .text-bottom .right {
     text-align: right;
+    width: 25%;
 }
 </style>

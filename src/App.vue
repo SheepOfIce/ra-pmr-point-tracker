@@ -1,4 +1,5 @@
 <template>
+    <PopOutButton />
     <div class="app-container">
         <ImportantItems />
         <PointTracker />
@@ -10,6 +11,7 @@
 import PointTracker from './components/PointTracker.vue'
 import ImportantItems from './components/ImportantItems.vue'
 import UsageHelp from './components/UsageHelp.vue'
+import PopOutButton from './components/PopOutButton.vue'
 
 import 'floating-vue/dist/style.css'
 
@@ -18,7 +20,8 @@ export default {
     components: {
         PointTracker,
         ImportantItems,
-        UsageHelp
+        UsageHelp,
+        PopOutButton
     }
 }
 </script>
