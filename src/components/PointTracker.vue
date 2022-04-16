@@ -117,7 +117,9 @@ let getBaseTrackerValues = function() {
 }
 
 let initializeTracker = function() {
-    localStorage.setItem(KEY, JSON.stringify(getBaseTrackerValues()))
+    let trackerData = JSON.stringify(getBaseTrackerValues())
+    localStorage.setItem(KEY, trackerData)
+    return trackerData
 }
 
 export default {
@@ -126,7 +128,7 @@ export default {
         let trackerData = localStorage.getItem(KEY)
 
         if (typeof trackerData !== 'string') {
-            initializeTracker()
+            trackerData = initializeTracker()
         }
 
         return {
