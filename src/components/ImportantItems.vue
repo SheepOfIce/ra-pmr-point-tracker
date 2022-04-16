@@ -41,7 +41,10 @@ export default {
 
 <style scoped>
 .container {
-    height: 390px;
+    display: flex;
+        flex-direction: column;
+        justify-content: center;
+    height: 540px;
     margin-right: 25px;
     text-align: center;
     width: 150px;
