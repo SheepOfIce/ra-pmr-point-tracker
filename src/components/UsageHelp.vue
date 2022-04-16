@@ -3,6 +3,7 @@
         <p>Left-click a category to increase its count by 1.</p>
         <p>Right-click a category to decrease its count by 1.</p>
         <p>Points are calculated automatically.</p>
+        <p>Ctrl/Cmd + C will copy total item count to clipboard.</p>
         <p>Progress is saved across visits. Press the below button to reset progress.</p>
         <p><a class="button" href="#" @click="showModal">Reset Progress</a></p>
     </div>
@@ -26,6 +27,7 @@ export default {
             shouldShowModal: false
         }
     },
+    emits: [ 'resetProgress' ],
     methods: {
         showModal(event) {
             event.preventDefault()

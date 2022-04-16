@@ -122,6 +122,12 @@ let initializeTracker = function() {
     return trackerData
 }
 
+let makePlural = function(count, word) {
+    if (count === 1) return word
+
+    return word + 's'
+}
+
 export default {
     name: 'PointTracker',
     data() {
@@ -174,6 +180,28 @@ export default {
         },
         saveTrackerData() {
             localStorage.setItem(KEY, JSON.stringify(this.trackerData))
+        },
+        getTrackerDataAsText() {
+            let output = []
+
+            let numberOfPartners = this.trackerData.goombario + this.trackerData.partners
+            let goombarioText = this.trackerData.goombario === 1 ? 'Have Goombario' : 'No Goombario'
+            let partnerLabel = makePlural(numberOfPartners, 'Partner')
+            output.push(`${numberOfPartners} ${partnerLabel} (${goombarioText})`)
+
+            let badgeLabel = makePlural(this.trackerData.badges, 'Badge')
+            output.push(`${this.trackerData.badges} ${badgeLabel}`)
+
+            let starPieceLabel = makePlural(this.trackerData.pieces, 'Star Piece')
+            output.push(`${this.trackerData.pieces} ${starPieceLabel}`)
+
+            let keyItemLabel = makePlural(this.trackerData.keys, 'Key Item')
+            output.push(`${this.trackerData.keys} ${keyItemLabel}`)
+
+            let starSpiritLabel = makePlural(this.trackerData.stars, 'Star Spirit')
+            output.push(`${this.trackerData.stars} ${starSpiritLabel}`)
+
+            return output.join('   /   ')
         }
     }
 }

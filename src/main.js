@@ -6,7 +6,7 @@ import App from './App.vue'
 import FloatingVue from 'floating-vue'
 import VueUniversalModal from 'vue-universal-modal'
 
-createApp(App)
+let app = createApp(App)
     .use(
         VueUniversalModal,
         { teleportTarget: '#modals' })
@@ -23,3 +23,12 @@ createApp(App)
             }
         })
     .mount('#app')
+
+window.onkeydown = function(event) {
+    if (!event.ctrlKey && !event.metaKey) return
+    if (event.keyCode !== 67) return
+    
+    event.preventDefault();
+
+    app.copy()
+}

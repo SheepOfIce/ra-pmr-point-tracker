@@ -20,6 +20,11 @@ export default {
         ImportantItems,
         UsageHelp,
         PopOutButton
+    },
+    methods: {
+        copy() {
+            navigator.clipboard.writeText(this.$refs.tracker.getTrackerDataAsText())
+        }
     }
 }
 </script>
