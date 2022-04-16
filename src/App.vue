@@ -13,8 +13,6 @@ import ImportantItems from './components/ImportantItems.vue'
 import UsageHelp from './components/UsageHelp.vue'
 import PopOutButton from './components/PopOutButton.vue'
 
-import 'floating-vue/dist/style.css'
-
 export default {
     name: 'App',
     components: {
