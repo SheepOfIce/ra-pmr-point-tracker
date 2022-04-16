@@ -1,79 +1,79 @@
 <template>
     <div class="tracker">
-        <div class="category goombario">
+        <div class="category goombario" @click="increment('goombario')" @contextmenu="e => decrement(e, 'goombario')">
             <div class="padding">
                 <div class="text-top">
                     <div class="left">Goombario</div>
-                    <div class="right">0/1</div>
+                    <div class="right">{{ trackerData.goombario }}/1</div>
                 </div>
                 <div class="text-bottom">
                     <div class="left">10 Points</div>
-                    <div class="right">0/10 Points</div>
+                    <div class="right">{{ trackerData.goombario * 10 }}/10 Points</div>
                 </div>
             </div>
         </div>
 
-        <div class="category partners">
+        <div class="category partners" @click="increment('partners')" @contextmenu="e => decrement(e, 'partners')">
             <div class="padding">
                 <div class="text-top">
                     <div class="left">Other Partners</div>
-                    <div class="right">0/7</div>
+                    <div class="right">{{ trackerData.partners }}/7</div>
                 </div>
                 <div class="text-bottom">
                     <div class="left">5 Points Each</div>
-                    <div class="right">0/35 Points</div>
+                    <div class="right">{{ trackerData.partners * 5 }}/35 Points</div>
                 </div>
             </div>
         </div>
 
-        <div class="category badges">
+        <div class="category badges" @click="increment('badges')" @contextmenu="e => decrement(e, 'badges')">
             <div class="padding">
                 <div class="text-top">
                     <div class="left">Badges</div>
-                    <div class="right">0/80</div>
+                    <div class="right">{{ trackerData.badges }}/80</div>
                 </div>
                 <div class="text-bottom">
                     <div class="left">1 Point Each</div>
-                    <div class="right">0/80 Points</div>
+                    <div class="right">{{ trackerData.badges }}/80 Points</div>
                 </div>
             </div>
         </div>
 
-        <div class="category pieces">
+        <div class="category pieces" @click="increment('pieces')" @contextmenu="e => decrement(e, 'pieces')">
             <div class="padding">
                 <div class="text-top">
                     <div class="left">Star Pieces</div>
-                    <div class="right">0/160</div>
+                    <div class="right">{{ trackerData.pieces }}/160</div>
                 </div>
                 <div class="text-bottom">
                     <div class="left">1 Point Each</div>
-                    <div class="right">0/160 Points</div>
+                    <div class="right">{{ trackerData.pieces }}/160 Points</div>
                 </div>
             </div>
         </div>
 
-        <div class="category keys">
+        <div class="category keys" @click="increment('keys')" @contextmenu="e => decrement(e, 'keys')">
             <div class="padding">
                 <div class="text-top">
                     <div class="left">Important Items</div>
-                    <div class="right">0/35</div>
+                    <div class="right">{{ trackerData.keys }}/35</div>
                 </div>
                 <div class="text-bottom">
                     <div class="left">5 Points Each</div>
-                    <div class="right">0/175 Points</div>
+                    <div class="right">{{ trackerData.keys * 5 }}/175 Points</div>
                 </div>
             </div>
         </div>
         
-        <div class="category stars">
+        <div class="category stars" @click="increment('stars')" @contextmenu="e => decrement(e, 'stars')">
             <div class="padding">
                 <div class="text-top">
                     <div class="left">Star Spirits</div>
-                    <div class="right">0/7</div>
+                    <div class="right">{{ trackerData.stars }}/7</div>
                 </div>
                 <div class="text-bottom">
                     <div class="left">10 Points Each</div>
-                    <div class="right">0/70 Points</div>
+                    <div class="right">{{ trackerData.stars * 10 }}/70 Points</div>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
             <div class="padding">
                 <div class="text-top">
                     <div class="left">Total</div>
-                    <div class="right">0/530</div>
+                    <div class="right">{{ totalPoints }}/530</div>
                 </div>
                 <div class="text-bottom">
                     <div class="left">&nbsp;</div>
@@ -94,8 +94,86 @@
 </template>
 
 <script>
+const KEY = 'tracker'
+
+const MAX_VALUES = {
+    goombario: 1,
+    partners: 7,
+    badges: 80,
+    pieces: 160,
+    keys: 35,
+    stars: 7
+}
+
+let getBaseTrackerValues = function() {
+    return {
+        goombario: 0,
+        partners: 0,
+        badges: 0,
+        pieces: 0,
+        keys: 0,
+        stars: 0
+    }
+}
+
+let initializeTracker = function() {
+    localStorage.setItem(KEY, JSON.stringify(getBaseTrackerValues()))
+}
+
 export default {
-  name: 'PointTracker'
+    name: 'PointTracker',
+    data() {
+        let trackerData = localStorage.getItem(KEY)
+
+        if (typeof trackerData !== 'string') {
+            initializeTracker()
+        }
+
+        return {
+            trackerData: JSON.parse(trackerData)
+        };
+    },
+    computed: {
+        totalPoints() {
+            return this.trackerData.goombario * 10
+                + this.trackerData.partners * 5
+                + this.trackerData.badges
+                + this.trackerData.pieces
+                + this.trackerData.keys * 5
+                + this.trackerData.stars * 10
+        }
+    },
+    methods: {
+        resetProgress() {
+            initializeTracker()
+            this.trackerData = getBaseTrackerValues()
+        },
+        increment(categoryName) {
+            this.trackerData[categoryName]++
+
+            if (this.trackerData[categoryName] > MAX_VALUES[categoryName]) {
+                this.trackerData[categoryName] = MAX_VALUES[categoryName]
+                return
+            }
+
+            this.saveTrackerData()
+        },
+        decrement(event, categoryName) {
+            event.preventDefault()
+
+            this.trackerData[categoryName]--
+
+            if (this.trackerData[categoryName] < 0) {
+                this.trackerData[categoryName] = 0
+                return
+            }
+
+            this.saveTrackerData()
+        },
+        saveTrackerData() {
+            localStorage.setItem(KEY, JSON.stringify(this.trackerData))
+        }
+    }
 }
 </script>
 
@@ -169,12 +247,12 @@ export default {
 
 .text-top .left,
 .text-bottom .left {
-    width: 75%;
+    width: 70%;
 }
 
 .text-top .right,
 .text-bottom .right {
     text-align: right;
-    width: 25%;
+    width: 30%;
 }
 </style>

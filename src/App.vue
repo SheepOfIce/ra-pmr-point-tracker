@@ -2,8 +2,8 @@
     <PopOutButton />
     <div class="app-container">
         <ImportantItems />
-        <PointTracker />
-        <UsageHelp />
+        <PointTracker ref="tracker" />
+        <UsageHelp @reset-progress="$refs.tracker.resetProgress()" />
     </div>
 </template>
 

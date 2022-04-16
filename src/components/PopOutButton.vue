@@ -1,6 +1,7 @@
 <template>
     <div class="container pop-out-hide">
         <a class="button" href="#" @click="popOutTracker" v-tooltip="'Opens tracker in a new window & hides help text.'">Pop-out Tracker</a>
+        <p>(Progress won't save between the two windows, refresh the page to update totals)</p>
     </div>
 </template>
 
@@ -23,5 +24,6 @@ export default {
     position: absolute;
         top: 10px;
         right: 10px;
+    text-align: right;
 }
 </style>
