@@ -2,19 +2,23 @@
     <div class="app-container">
         <ImportantItems />
         <PointTracker />
+        <UsageHelp />
     </div>
 </template>
 
 <script>
 import PointTracker from './components/PointTracker.vue'
 import ImportantItems from './components/ImportantItems.vue'
+import UsageHelp from './components/UsageHelp.vue'
+
 import 'floating-vue/dist/style.css'
 
 export default {
     name: 'App',
     components: {
         PointTracker,
-        ImportantItems
+        ImportantItems,
+        UsageHelp
     }
 }
 </script>
@@ -28,27 +32,32 @@ body {
 
 body {
     background-color: #a4d5d5;
+    font-family: 'Roboto', sans-serif;
 }
 
 .app-container {
     display: flex;
         align-items: center;
         justify-content: center;
-    font-family: 'Roboto', sans-serif;
     height: 100vh;
 }
 
-.app-container a {
+a {
     color: #628989;
 }
 
-.v-popper__popper {
-    font-family: 'Roboto', sans-serif;
+a.button {
+    background-color: #628989;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    padding: 7px 10px;
+    text-decoration: none;
 }
 
-@media (max-width: 782px) {
+@media (max-width: 812px) {
     .pop-out-hide {
-        display: none;
+        display: none !important;
     }
 }
 </style>
